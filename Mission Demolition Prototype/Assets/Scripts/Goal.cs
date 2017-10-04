@@ -1,0 +1,31 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Goal : MonoBehaviour {
+
+	// A static field accessible by code anywhere
+	static public bool			goalMet = false;
+
+	void OnTriggerEnter (Collider other)
+	{
+		// WHen the trigger is hit by something else
+		// Check to see if it is a projectile
+		if (other.gameObject.tag == "Projectile")
+		{
+			// If so, set goalMet to true
+			Goal.goalMet = true;
+			// Also set the alpha of the color to highter opacity
+			Color c = GetComponent<Renderer>().material.color;
+			c.a = 1;
+			GetComponent<Renderer>().material.color = c;
+		}
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+		Debug.Log("GoalMet: " + goalMet);
+		
+	}
+}
